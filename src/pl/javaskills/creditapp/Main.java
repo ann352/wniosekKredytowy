@@ -7,15 +7,11 @@ import pl.javaskills.creditapp.core.model.Person;
 public class Main {
 
     public static void main(String[] args) {
-        CreditApplicationService service = new CreditApplicationService(); //tworze instancje klasy, ktora ma zwrocic decyzje
-
-        //w obiekt typu PersonalData wrzucam wynik dzialania metody z klasy ConsoleReader(ktora zwraca nowy obiekt typu PersonalData)
+        CreditApplicationService service = new CreditApplicationService();
         Person person = new ConsoleReader().readInputParameters();
 
-        String decision = service.getDecision(person); //na obiekccie klasy CreditApplicationService zostaje wywolana metoda(argumentem jest wczytany obiekt)
+        String decision = service.getDecision(person);
 
-        System.out.println(decision); //wyswietlamy decyzje na ekranie
-
+        System.out.println(decision);
     }
-
 }

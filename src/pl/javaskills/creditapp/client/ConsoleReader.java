@@ -39,8 +39,15 @@ public class ConsoleReader {
         System.out.println("Enter number of family dependants (including applicant):");
         int numOfDependant = in.nextInt();
 
+        System.out.println("What is purpose of loan? (MORTGAGE | PERSONAL_LOAN)"); //dorzucam to pole
+        PurposeOfLoanType purposeOfLoanType = PurposeOfLoanType.valueOf(in.next()); //pobierajac z konsoli String, konwertujemy go na ENUM (Enum.valueOf(in.next());
+
+        System.out.println("Enter loan amount:");
+        double purposeOfAmount = in.nextDouble();  //dorzcam to pole
+
         PersonalData personalData = new PersonalData(name, lastName, mothersMaidenName, income, null, null, numOfDependant);
         ContactData contactData = new ContactData(email, phoneNumber);
+        PurposeOfLoan purposeOfLoan = new PurposeOfLoan(purposeOfLoanType, purposeOfAmount);
 
         return new Person(personalData, contactData);
     }
