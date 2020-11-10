@@ -23,4 +23,9 @@ public class Person {
         return contactData;
     }
 
+    //przenosimy sobie metodę z PersonScoringCalculator do klasy person wyliczjacą sedni dochod, bo i atk tutaj mamy wsyzstkie potrzebne dane
+    public double getIncomePerFamilyMember(){
+        return this.getPersonalData().getTotalMonthlyIncomeInPln() / this.getPersonalData().getNumOfDependants();
+    }
+
 }

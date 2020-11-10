@@ -1,29 +1,27 @@
 package pl.javaskills.creditapp.client;
 
-
 import pl.javaskills.creditapp.core.model.*;
 
-import java.util.Scanner; //klasa ConsoleReader importuje klase Scanner, ktora pobierze dane z konsoli
+import java.util.Scanner;
 
+//teraz zamiast obiektu Person, klasa ConsoleReader ma zwracac obiekt ConsoleReader
 public class ConsoleReader {
 
-    public Person readInputParameters(){  //metoda w klasie ConsoleReader, ktora zwroci nam gotowy obiekt typu PersonalData
-        Scanner in = new Scanner(System.in); //tworzymy obiekt typu Scanner(System.in);
+    public CreditApplication readInputParameters() {
+        Scanner in = new Scanner(System.in);
 
-        System.out.println("Enter your name: ");
-        String name = in.next();    //pytamy o kolejne dane użytkownika i umiesczamy je kolejno w zmiennych,
+        System.out.println("Enter your name");
+        String name = in.next();
 
-        System.out.println("Enter your last name: ");
+        System.out.println("Enter your last name");
         String lastName = in.next();
 
-        System.out.println("Enter your mothers maiden name: ");
+        System.out.println("Enter your mothers maiden name");
         String mothersMaidenName = in.next();
 
-        //Enum -> odczytamy jako String i wywolamy na nim statyczną metode MaritalStatus.valueOf()
         System.out.println("What is your marital status? (SINGLE, MARRIED, DIVORCED, WIDOWED, SEPARATED)");
         MaritalStatus maritalStatus = MaritalStatus.valueOf(in.next());
 
-        //Enum -> odczytamy jako String i wywolamy na nim statyczną metode Education.valueOf()
         System.out.println("What is your education level? (NONE, PRIMARY, MIDDLE, SECONDARY, POST_SECONDARY, TERTIARY)");
         Education education = Education.valueOf(in.next());
 
@@ -39,18 +37,21 @@ public class ConsoleReader {
         System.out.println("Enter number of family dependants (including applicant):");
         int numOfDependant = in.nextInt();
 
-        System.out.println("What is purpose of loan? (MORTGAGE | PERSONAL_LOAN)"); //dorzucam to pole
-        PurposeOfLoanType purposeOfLoanType = PurposeOfLoanType.valueOf(in.next()); //pobierajac z konsoli String, konwertujemy go na ENUM (Enum.valueOf(in.next());
+        System.out.println("What is purpose of loan? (MORTGAGE | PERSONAL_LOAN):");
+        PurposeOfLoanType purposeOfLoanType = PurposeOfLoanType.valueOf(in.next());
 
-        System.out.println("Enter loan amount:");
-        double purposeOfAmount = in.nextDouble();  //dorzcam to pole
+        System.out.println("Enter loan amount");
+        double purposeOfLoanAmount = in.nextDouble();
 
-        PersonalData personalData = new PersonalData(name, lastName, mothersMaidenName, income, null, null, numOfDependant);
+        System.out.println("Enter loan period (in years)"); //dokładamy nowe pole
+        int period = in.nextInt();
+
+        PersonalData personalData = new PersonalData(name, lastName, mothersMaidenName, income, maritalStatus, education, numOfDependant);
         ContactData contactData = new ContactData(email, phoneNumber);
-        PurposeOfLoan purposeOfLoan = new PurposeOfLoan(purposeOfLoanType, purposeOfAmount);
+        PurposeOfLoan purposeOfLoan = new PurposeOfLoan(purposeOfLoanType,purposeOfLoanAmount, period);
 
-        return new Person(personalData, contactData);
+
+        //a tu będzie zwracany obiekt CreditApplication(wczesniejszy obiekt Person(dane osobowe, kontaktowe), cel pozyczki)
+        return new CreditApplication(new Person(personalData,contactData), purposeOfLoan);
     }
 }
-
-        //efektem bedzie zwrocenie obiektu typu Person z danymi osobowymi i kontaktowymi
